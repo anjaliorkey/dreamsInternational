@@ -1,7 +1,9 @@
 @extends('layouts.app')
-
 @section('content')
-
+@include('include.navbar')
+<section id="home">
+    <div class="bg-holder" style="background-image:url(public/assets/img/gallery/hero.png);background-position:center;background-size:cover; height: 20px;"></div>
+</section>
 <div class="container">
     <div class="row justify-content-center">
         <div class="col">
@@ -24,6 +26,7 @@
                                 <th scope="col">City</th>
                                 <th scope="col">Gender</th>
                                 <th scope="col">Photo</th>
+                                <th scope="col">Captcha</th>
                                 <th scope="col">Action</th>
                             </tr>
                         </thead>
@@ -37,7 +40,9 @@
                                 <td>{{ $value->address }}</td>
                                 <td>{{ $value->city }}</td>
                                 <td>{{ $value->gender }}</td>
+                               
                                 <td>  <img src="{{ url('public/img/'.$value->photo) }}"style="height: 100px; width: 150px;"></td>
+                                 <td>{{ $value->captcha }}</td>
                                 <td><button><a href="/{{$value->id}}">Edit</a></button></td>
                                 <td><button><a href="/delete/{{$value->id}}">Delete</a></button></td>
                             </tr>
@@ -49,5 +54,6 @@
         </div>
     </div>
 </div>
+      @include('include.footer')
 
 @endsection

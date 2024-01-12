@@ -33,6 +33,7 @@ public function formSave(Request $request)
         'city' => 'required',
         'gender' => 'required|in:male,female',
         'img' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
+        'Repeatcaptcha' => 'required',
 
     ]);
     $NameDemo = $request->input('firstName');
@@ -41,6 +42,8 @@ public function formSave(Request $request)
     $AddressDemo = $request->input('address');
     $CityDemo = $request->input('city');
     $GenderDemo = $request->input('gender');
+    $dataCaptcha = $request->input('Repeatcaptcha');
+
 
     if ($request->hasFile('img')) {
         $file = $request->file('img');
@@ -57,6 +60,7 @@ public function formSave(Request $request)
         'city'=> $CityDemo,
         'gender'=> $GenderDemo,
         'photo' => $filename,
+        'captcha' => $dataCaptcha,
     );
 
     DB::table('registrations')->insert($data);
@@ -66,7 +70,7 @@ public function formSave(Request $request)
 public function formtable(Request $request)
 {
 
-    $blogs = DB::table('registrations')->select('id', 'name','email','mobile', 'address', 'city', 'gender','photo')->get();
+    $blogs = DB::table('registrations')->select('id', 'name','email','mobile', 'address', 'city', 'gender','photo','captcha')->get();
     return view('table', compact('blogs'));
 } 
 
@@ -88,6 +92,8 @@ public function formupdate(Request $request)
     $AddressDemo = $request->input('address');
     $CityDemo = $request->input('city');
     $GenderDemo = $request->input('gender');
+    $dataCaptcha = $request->input('Repeatcaptcha');
+
 
     if ($request->hasFile('img')) {
         $file = $request->file('img');
@@ -104,6 +110,8 @@ public function formupdate(Request $request)
         'city'=> $CityDemo,
         'gender'=> $GenderDemo,
         'photo' => $filename,
+        'captcha' => $dataCaptcha,
+
     );
 
     DB::table('registrations')->where('id', $idData)->update($data);

@@ -1,11 +1,13 @@
 @extends('layouts.app')
-
 @section('content')
-
+@include('include.navbar')
+<section id="home">
+    <div class="bg-holder" style="background-image:url(public/assets/img/gallery/hero.png);background-position:center;background-size:cover; height: 20px;"></div>
+</section>
 <div class="container">
     <div class="row justify-content-center">
         <div class="col">
-            <div class="card">
+           
                 <div class="card-body">
                     @if (session('status'))
                     <div class="alert alert-success" role="alert">
@@ -17,7 +19,7 @@
                         <div class="row justify-content-center">
                             <div class="col">
                                 <div class="form-box">
-                                    <h1>Form <span>Registration</span></h1>
+                                    <h1>Resitration <span>Form</span></h1>
                                     <form role="form" id="contact-form" method="post" action="/save" enctype="multipart/form-data">
 
                                         @csrf
@@ -112,10 +114,30 @@
                                             </div>
                                              <div id="photoError" class="sr-only" role="alert"><span style="color: red;">{{ $errors->first('img') }}</span></div>
                                         </div>
-                                       
 
+                                        <!-- captcha field -->
+                                        <div class="form-group">
+                                            <div class="input-group input-group-sm mb-3">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text"><i class="fa fa-mobile" aria-hidden="true"></i></span>
+                                                </div>
+                                                <input class="form-control" type="text" id="captcha" name="captcha"  value="<?php echo bin2hex(random_bytes(3));?>" >
+                                            </div>
+                                            <div id="captcha-number-err" class="text-danger"><span style="color: red;">{{ $errors->first('captcha') }}</span></div>
+                                        </div>
+                                        
+                                        <!-- Recaptcha field -->
+                                        <div class="form-group">
+                                            <div class="input-group input-group-sm mb-3">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text"><i class="fa fa-mobile" aria-hidden="true"></i></span>
+                                                </div>
+                                                <input class="form-control" type="text" id="Repeatcaptcha" name="Repeatcaptcha"  placeholder="Repeatcaptcha">
+                                            </div>
+                                            <div id="captcha-number-err" class="text-danger"><span style="color: red;">{{ $errors->first('Repeatcaptcha') }}</span></div>
+                                        </div>
 
-                                        <div class="text-center">
+                                         <div class="text-center">
                                             <button type="submit" class="btn btn-primary" onclick="validateForm()">Submit</button>
                                         </div>
                                     </form>   
@@ -129,6 +151,9 @@
         </div>
     </div>
 </div>
+
+      @include('include.footer')
+
 
 <script>
 
@@ -242,6 +267,14 @@
 </script>
 
 
-
+ <script>
+    document.getElementById('refreshCaptcha').addEventListener('click', function () {
+        fetch('/generate-captcha')
+            .then(response => response.json())
+            .then(data => {
+                document.querySelector('label[for="captcha"]').innerText = `CAPTCHA: ${data.question} = ?`;
+            });
+    });
+</script>
 
 @endsection

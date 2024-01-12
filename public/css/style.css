@@ -22,7 +22,7 @@ body {
     text-align: center;
     font-weight: bold;
     text-transform: uppercase;
-    color: #dc3545; /* Bootstrap red color */
+    color: cornflowerblue; /* Bootstrap red color */
 }
 
 .form-box h1 span {
@@ -60,3 +60,4 @@ body {
         width: 80%;
     }
 }
+

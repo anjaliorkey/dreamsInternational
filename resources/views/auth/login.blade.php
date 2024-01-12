@@ -1,6 +1,10 @@
 @extends('layouts.app')
-
 @section('content')
+@include('include.navbar')
+<section id="home">
+    <div class="bg-holder" style="background-image:url(public/assets/img/gallery/hero.png);background-position:center;background-size:cover; height: 20px;"></div>
+</section>
+
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
@@ -70,4 +74,8 @@
         </div>
     </div>
 </div>
+
+      @include('include.footer')
+
+
 @endsection
