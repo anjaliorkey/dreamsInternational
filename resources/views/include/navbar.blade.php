@@ -3,12 +3,15 @@
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"> </span></button>
           <div class="collapse navbar-collapse mt-4 mt-lg-0" id="navbarSupportedContent">
             <ul class="navbar-nav ms-auto pt-2 pt-lg-0 font-base">
-              <li class="nav-item px-2" data-anchor="data-anchor"><a class="nav-link fw-medium active" aria-current="page" href="#home">Home</a></li>
-              <li class="nav-item px-2" data-anchor="data-anchor"><a class="nav-link" href="#team">Team</a></li>
-              <li class="nav-item px-2" data-anchor="data-anchor"><a class="nav-link" href="#pricingTable">Pricing table</a></li>
-              <li class="nav-item px-2" data-anchor="data-anchor"><a class="nav-link" href="#help">Help</a></li>
+             <a href="homeDash" class="nav-item nav-link active">Home</a>
+                <a href="onlineForm" class="nav-item nav-link">Registerd Rent Agreement</a>
+                <a href="agreTable" class="nav-item nav-link">Agreement Usrs</a>
+                <a href="viewBlogDash" class="nav-item nav-link">Blogs</a>
+                <a href="HomeContact" class="nav-item nav-link">Contact</a>
             </ul>
            <ul class="navbar-nav ms-auto text-center">
+
+
         <!-- Authentication Links -->
         @guest
         @if (Route::has('login'))

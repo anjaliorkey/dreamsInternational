@@ -47,6 +47,19 @@
 
 
     
-    </style>
+   
+
+<!-- Your HTML code remains unchanged -->
+
+<fieldset>
+    <!-- MultiStep Form -->
+    <div class="container-fluid" id="grad1">
+        <!-- ... (your existing code) ... -->
+    </div>
+
+    <input type="button" name="previous" class="previous action-button-previous" value="Previous"/>
+    <input type="button" name="next" class="next action-button" value="Next Step"/>
+</fieldset>
+
 
   </head>

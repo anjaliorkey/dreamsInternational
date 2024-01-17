@@ -22,7 +22,8 @@ public function __construct()
 public function index()
 {
     return view('home');
-} 
+}
+
 public function formSave(Request $request)
 {
     $request->validate([
@@ -123,6 +124,158 @@ public function formdelete(Request $request, $ids)
 {
     DB::table('registrations')->where('id', $ids)->delete();
     return redirect('/table');
+}
+
+public function formOnline(Request $request)
+{
+   return view('onlineForm');
+}
+public function rentForm(Request $request)
+{
+
+     $request->validate([
+        'ufname' => 'required',
+        'ulname' => 'required',
+        'phone' => 'required',
+        'email' => 'required',
+        'oldAgreementRef' => 'required',
+        'agreementTenure' => 'required',
+        'rentAmount' => 'required',
+        'maintenancePaidBy' => 'required',
+        'furnitureAppliances' => 'required',
+        'miscellaneous' => 'required',
+        'startDate' => 'required',
+        'depositAmount' => 'required',
+        'costBearer' => 'required',
+        'tenantType' => 'required',
+        'totalTenant' => 'required',
+
+    ]);
+
+    $FirstDemo = $request->input('ufname');
+    $LastDemo = $request->input('ulname');
+    $PhoneDemo = $request->input('phone');
+    $EmailDemo = $request->input('email');
+
+    $agreeRef = $request->input('oldAgreementRef');
+
+
+    
+    $TenureDemo = $request->input('agreementTenure');
+    $RentDemo = $request->input('rentAmount');
+    $maintainance = $request->input('maintenancePaidBy');
+    $furnitureDemo = $request->input('furnitureAppliances');
+    $miscellaneousDemo = $request->input('miscellaneous');
+    $startDateDemo = $request->input('startDate');
+    $depositAmountDemo = $request->input('depositAmount');
+    $costBearerDemo = $request->input('costBearer');
+    $tenantTypeDemo = $request->input('tenantType');
+    $totalTenantDemo = $request->input('totalTenant');
+
+ 
+
+
+ $data = array(
+        'firstname'=> $FirstDemo,
+        'lastname'=> $LastDemo,
+        'phone'=> $PhoneDemo,
+        'email'=> $EmailDemo,
+        'oldagrement'=> $agreeRef,
+        'tenorMonth' => $TenureDemo,
+        'rentamt' => $RentDemo,
+        'socityMaintenance' => $maintainance,
+        'FurnitureandAppliances' => $furnitureDemo,
+        'Miscellaneous' => $miscellaneousDemo,
+        'AgreementStartDate' => $startDateDemo,
+        'DepositAmount' => $depositAmountDemo,
+        'Agreementcost' => $costBearerDemo,
+        'tenantType' => $tenantTypeDemo,
+        'totalTenant' => $totalTenantDemo,
+       
+    );
+
+  DB::table('onlineform')->insert($data);
+   
+    return redirect('/agreTable');
+
+}
+
+
+public function AggrimentUsertable(Request $request)
+{
+    $blogsDemoTo = DB::table('onlineform')->select('id', 'firstname','lastname','phone', 'email', 'oldagrement', 'tenorMonth','rentamt','socityMaintenance','FurnitureandAppliances','Miscellaneous','AgreementStartDate','DepositAmount','Agreementcost','tenantType','totalTenant')->get();
+    
+   
+
+    return view('AggriUsertable', compact('blogsDemoTo'));
+}
+
+public function Agreeformedit(Request $request, $idsDemo, $id)
+{
+    $blogType = DB::table('onlineform')->where('id', $id)->first();
+    return view('editagri', compact('blogType'));
+}
+
+
+
+public function formupdateDemo(Request $request)
+{
+    $idData = $request->input('hiddID');
+    $FirstDemo = $request->input('ufname');
+    $LastDemo = $request->input('ulname');
+    $PhoneDemo = $request->input('phone');
+    $EmailDemo = $request->input('email');
+
+    $agreeRef = $request->input('oldAgreementRef');
+
+
+    
+    $TenureDemo = $request->input('agreementTenure');
+    $RentDemo = $request->input('rentAmount');
+    $maintainance = $request->input('maintenancePaidBy');
+    $furnitureDemo = $request->input('furnitureAppliances');
+    $miscellaneousDemo = $request->input('miscellaneous');
+    $startDateDemo = $request->input('startDate');
+    $depositAmountDemo = $request->input('depositAmount');
+    $costBearerDemo = $request->input('costBearer');
+    $tenantTypeDemo = $request->input('tenantType');
+    $totalTenantDemo = $request->input('totalTenant');
+
+ 
+
+
+ $data = array(
+        'firstname'=> $FirstDemo,
+        'lastname'=> $LastDemo,
+        'phone'=> $PhoneDemo,
+        'email'=> $EmailDemo,
+        'oldagrement'=> $agreeRef,
+        'tenorMonth' => $TenureDemo,
+        'rentamt' => $RentDemo,
+        'socityMaintenance' => $maintainance,
+        'FurnitureandAppliances' => $furnitureDemo,
+        'Miscellaneous' => $miscellaneousDemo,
+        'AgreementStartDate' => $startDateDemo,
+        'DepositAmount' => $depositAmountDemo,
+        'Agreementcost' => $costBearerDemo,
+        'tenantType' => $tenantTypeDemo,
+        'totalTenant' => $totalTenantDemo,
+       
+    );
+
+   DB::table('onlineform')->where('id', $idData)->update($data);
+
+    
+    return redirect('/agreTable');
+
+}
+
+
+
+public function Agreeformdelete(Request $request, $idsText, $id)
+{
+    $blogType = DB::table('onlineform')->where('id', $id)->delete();
+    return redirect('/agreTable');
 }
 
 
